@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <main>
+        <section>
+    <h1>Enter City Name</h1>
+    <form method="post" action="{% url 'get_weather' %}">
+        {% csrf_token %}
+        <input type="text" name="city_name" placeholder="City Name" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather_data %}
+    <h2>Weather Forecast for {{ city_name }}</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Condition</th>
+            <th>Max Temp (°C)</th>
+            <th>Min Temp (°C)</th>
+        </tr>
+        {% for day in weather_data %}
+        <tr>
+            <td>{{ day.date }}</td>
+            <td>{{ day.day.condition.text }}</td>
+            <td>{{ day.day.maxtemp_c }}</td>
+            <td>{{ day.day.mintemp_c }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+        </section>
+    </main>
+</body>
+</html>
