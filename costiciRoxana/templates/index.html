@@ -34,6 +34,12 @@
         {% endfor %}
     </table>
     {% endif %}
+    {% if error_message %}
+    <div class="error-message" style="color: red;">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
         </section>
     </main>
 </body>
